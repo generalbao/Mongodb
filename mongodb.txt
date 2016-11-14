@@ -1,0 +1,91 @@
+mongodb 安装与简单操作   2016年11月12日10:50:08
+
+1 下载  www.mongodb.com 我下载的是windows版本，后缀是.msi，直接点击安装，下一步就行了
+2 启动 
+            bin目录下 mongod.exe 是服务器端，   mongo.exe 是客户端
+       2.1 执行MongoDB服务器端 启动之前，我们要给mongodb指定一个文件夹(与安装好后的bin目录同级)，这里取名为”db",用来存放mongodb的数据。
+       微软徽标+R，输入cmd，首先找到“mongodb”的路径，然后运行mongod开启命令，同时用--dbpath指定数据存放地点为“db”文件夹 mongod --dbpath G:/mongodb/db
+       2.2 在浏览器打开http://localhost:27017/     27017是mongodb默认端口             
+       2.3 也可以执行MongoDB客户端  在bin目录下双击 mongo.exe
+       2.4 show dbs。。。 或者其他命令
+       
+
+
+3 2016年11月13日15:11:24
+基本操作
+a 创建数据库 use db1  
+如果数据库不存在，则创建数据库，否则切换到指定数据库。
+
+show dbs 查看有多少数据库
+们刚创建的数据库 db1 并不在数据库的列表中， 要显示它，我们需要向 db1 数据库插入一些数据
+db1.col.insert({"name":"bb","age":"20"})
+
+show dbs  这时候就会显示 col数据库
+
+b 删除数据库
+ use db1
+ db.dropDatabase()
+
+c 插入文档
+
+db.col1.insert({"name":"bb","age":"20","language":"php"})
+
+d 更新
+
+d1 update------   第一个参数 是条件  第二个是更新内容 第三个 是添加或者更新  第四个是一条还是全部
+db.col1.update({"name":"bao"},{ $set : {"name" : "change bao" }})   ==== update name='change bao' where name='bao' limit 1
+db.col1.update( {"name" : "bao" }, {$set " { "name" : "update bao"} }, {multi : true} )   全部更新
+
+db.col1.update( { "count" : { $gt : 4 } } , { $set : { "test5" : "OK"} },true,false );  只添加第一条：
+db.col.update( { "count" : { $gt : 5 } } , { $set : { "test5" : "OK"} },true,true );    全部添加加进去:
+
+db.col.update( { "count" : { $gt : 15 } } , { $inc : { "count" : 1} },false,true );  
+
+
+d2 save -----
+
+db.col1.save({
+	"_id" : ObjectId("56064f89ade2f21f36b03136"),
+    "title" : "MongoDB",
+    "description" : "MongoDB 是一个 Nosql 数据库",
+    "by" : "Runoob",
+    "url" : "http://www.runoob.com",
+    "tags" : [
+            "mongodb",
+            "NoSQL"
+    ],
+    "likes" : 110
+})
+
+
+e 查找
+db.col1.find()
+db.col1.find().pretty()  比较人性化显示
+db.col1.findOne()
+
+db.col1.find({ "name":"bao", "age" : "20" }).pretty()           where name='bao' and age='20'
+db.col1.find({$or : [ {"name":"bao"}, {"age" : "20"} ] }).pretty()   or
+
+f 删除
+db.col.remove({})  删除所有
+db.col.remove({ "name" : "age"  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+       
