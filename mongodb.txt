@@ -32,7 +32,7 @@ db.col1.insert({"name":"bb","age":"20","language":"php"})
 
 d 更新
 
-d1 update------   第一个参数 是条件  第二个是更新内容 第三个 是添加或者更新  第四个是一条还是全部
+d1 update------   第一个参数 是条件  第二个是更新内容 第三个 是添加(true)或者更新(false)  第四个是一条(false)还是全部(true)
 db.col1.update({"name":"bao"},{ $set : {"name" : "change bao" }})   ==== update name='change bao' where name='bao' limit 1
 db.col1.update( {"name" : "bao" }, {$set " { "name" : "update bao"} }, {multi : true} )   全部更新
 
