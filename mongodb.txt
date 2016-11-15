@@ -122,7 +122,30 @@ db.test.getIndexes()
 db.test.dropIndex()
 
 
-6666 
+6666  高级查询  聚合查询
+ 
+
+66666.aaaaa  聚合查询 $group
+
+db.mycol.aggregate([{$group : {_id : "$name", num_tutorial : {$sum : 1}}}])            ===  select name,count($name)  group by name
+
+
+
+
+66666.bbbb  $project 修改condition表的结构
+db.condition.aggregate(
+    { $project : {
+        title : 1 ,
+        author : 1 ,
+    }}
+ );
+
+66666.cccc  $match 匹配
+ db.articles.aggregate( [
+                        { $match : { age : { $gt : 20} } },
+                        { $group: { _id: null, count: { $sum: 1 } } }
+                       ] );
+
 
 
 
