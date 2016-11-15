@@ -70,6 +70,61 @@ f 删除
 db.col.remove({})  删除所有
 db.col.remove({ "name" : "age"  })
 
+!!!!!!!!!!!!!!!!!!!!   update 
+2016年11月15日16:45:21
+条件查询
+
+1111 $gt $lt $gte $lte
+db.condition.insert({ "name" : "bao", "age" : "20"   })
+db.condition.insert({ "name" : "bao", "age" : "25"   })
+db.condition.insert({ "name" : "bao", "age" : "29"   })
+db.condition.insert({ "name" : "bao", "age" : 55   })
+
+db.condition.find({ "age" : { $gt : "23" } })           where age > 23
+
+
+22222 $type 操作符
+db.condition.find({ "age" : { $type : 2 }})    查找age为double类型的数据
+
+
+type    value
+Double	1	 
+String	2	 
+Object	3	 
+Array	4	 
+Binary data	5 
+Object id	7	 
+Boolean	8	 
+Date	9	 
+Null	10
+
+
+3333   Limit与Skip方法
+
+db.condition.find().limit(2)           只查两条数据
+db.condition.find().limit(2).skip(1)   跳过第一条数据查询两条数据
+
+4444 排序  sort
+
+db.condition.find().sort({ "age" : 1})  正序
+db.condition.find().sort({ "age" : -1 }) 倒序
+
+5555 索引
+
+新建
+db.condition.ensureIndex( { "age" : 1 })  age 正序索引
+db.condition.ensureIndex( { "age" :1 , "tittle" : -1 })  age正序索引  title倒序索引
+
+得到
+db.test.getIndexes()
+
+删除
+db.test.dropIndex()
+
+
+6666 
+
+
 
 
 
